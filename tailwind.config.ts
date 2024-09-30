@@ -8,6 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        "app-grid-desktop": "300px 1fr",
+        "app-grid-laptop": "250px 1fr",
+      },
+      container: {
+        center: true,
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

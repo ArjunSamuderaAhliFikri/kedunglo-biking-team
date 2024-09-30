@@ -20,6 +20,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.edit-scrollbar {
+  scrollbar-color: red;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

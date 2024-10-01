@@ -78,7 +78,7 @@ const DashboardPage = (): JSX.Element => {
 
   return (
     <>
-      <main className="relative">
+      <main className="container relative">
         <div className="relative p-2">
           <div className="absolute right-0 flex items-center justify-around gap-5 h-20 px-2 py-4 rounded-md bg-slate-900 -bottom-15">
             <button

@@ -24,6 +24,11 @@ body {
   scrollbar-color: red;
 }
 
+::-webkit-scrollbar {
+  width: 0;
+  background-color: #7775;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

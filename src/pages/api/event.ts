@@ -1,27 +1,29 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import { dataEvents } from "@/service/data-events";
 
 type Data = {
   id: number;
-};
+  title: string;
+  qtyParticipan: number;
+  date: string;
+  description: string;
+  participans: {
+    name: string;
+    age: number;
+    email: string;
+    numberPhone: number;
+    statusMedalers: string;
+  }[];
+}[];
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  res.status(200).json({
-    id: 1,
-    title: "Medal Safar",
-    qtyParticipan: 100,
-    date: "17-04-2026",
-    description:
-      "lorem sit amert dolor hello word lorem whow to shake and then anything usually testing is posibbly undefined and program",
-    participans: [
-      {
-        name: "Arjun Samudera Ahli Fikri",
-        age: 18,
-        city: "Kota Kediri",
-        email: "arjunsaf717@gmail.com",
-        numberPhone: 1234344343,
-        statusMedalers: "LGOLDKBT",
-      },
-    ],
-  });
+function getDataItem(response: any) {
+  return response;
+}
+
+export default function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Data>
+) {
+  res.status(200).json(dataEvents);
 }

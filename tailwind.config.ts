@@ -20,6 +20,9 @@ const config: Config = {
         foreground: "var(--foreground)",
       },
     },
+    container: {
+      center: true,
+    },
   },
   plugins: [],
 };

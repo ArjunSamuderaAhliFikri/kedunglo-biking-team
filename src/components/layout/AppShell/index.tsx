@@ -10,6 +10,7 @@ const AppShell = (props: AppShellProps): JSX.Element => {
   const hideBgKBT = ["/ListEventPage", "/ListEventPage/[DetailEvent]"];
 
   const { pathname } = useRouter();
+  console.log(pathname);
 
   return (
     <div
@@ -20,7 +21,7 @@ const AppShell = (props: AppShellProps): JSX.Element => {
       } w-full h-[10.5dvh] ${outfit.className}`}
     >
       <TemplateLayout>
-        <SidebarLayout />
+        {pathname != "/ListEventPage/[DetailEvent]" && <SidebarLayout />}
         {props.children}
       </TemplateLayout>
     </div>

@@ -7,7 +7,7 @@ import EventNoteIcon from "@mui/icons-material/EventNote";
 const SidebarLayout = (): JSX.Element => {
   return (
     <>
-      <aside className="overflow-hidden bg-[#f5f5f5] rounded-2xl">
+      <aside className="overflow-y-auto bg-[#f5f5f5] rounded-2xl">
         <div className="relative w-full h-24 bg-gradient-to-b from-[#1E1E1E] from-50% to-[#000000]">
           <Image
             className="absolute -translate-x-1/2 rounded-full -bottom-7 left-1/2"

@@ -36,6 +36,7 @@ const DetailEvent = (): JSX.Element => {
   function handleFollowingEvent(): void {
     // const addMedalers = dataDetailEvent?.participans.map((data))
     // setDataDetailEvent({...dataDetailEvent, })
+    // todo
     return;
   }
 

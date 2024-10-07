@@ -29,8 +29,14 @@ const AppShell = (props: AppShellProps): JSX.Element => {
 };
 
 function TemplateLayout(props: AppShellProps): JSX.Element {
+  const { pathname } = useRouter();
   return (
-    <div className="grid 2xl:grid-cols-app-grid-desktop grid-cols-app-grid-laptop gap-5 absolute w-[95%] h-[90dvh] top-1/2 left-1/2 -translate-x-1/2">
+    <div
+      className={`${
+        pathname != "/ListEventPage/[DetailEvent]" &&
+        "grid 2xl:grid-cols-app-grid-desktop grid-cols-app-grid-laptop gap-5 absolute w-[95%] h-[90dvh] top-1/2 left-1/2 -translate-x-1/2"
+      }`}
+    >
       {props.children}
     </div>
   );

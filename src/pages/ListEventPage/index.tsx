@@ -21,6 +21,7 @@ type DataEvents = {
 
 const ListEventPage = (): JSX.Element => {
   const [listEvent, setListEvent] = useState<DataEvents>([]);
+  const [ticket, setTicket] = useState<string | null>("");
 
   useEffect(() => {
     const fetchingDataEvents = async () => {
@@ -33,9 +34,16 @@ const ListEventPage = (): JSX.Element => {
     fetchingDataEvents();
   }, []);
 
+  useEffect(() => {
+    // TODOOOOOO
+    localStorage.setItem("ticketPoint", "1");
+    // const getTicket = localStorage.getItem("ticket");
+    // setTicket(getTicket);
+  }, []);
+
   return (
     <>
-      <div className="container bg-slate-100 py-4 h-[90dvh] overflow-y-auto">
+      <div className="container py-4 h-[90dvh] overflow-y-auto">
         <div className="relative flex justify-center w-full lg:h-[325px] h-[375px] rounded-md">
           <div className="absolute w-1/2 h-full bg-gradient-to-r from-slate-800  via-slate-700/75 via-[80%] to-transparent to-[100%] top-0 left-0">
             {/* wrapper hero text */}
@@ -133,7 +141,7 @@ function CardEvent(props: CardEventProps): JSX.Element {
   return (
     <Link
       href={`ListEventPage/${props.id}`}
-      className="flex flex-col justify-between items-center bg-slate-200 overflow-hidden rounded-md shadow-xl cursor-pointer transition-all duration-150 hover:scale-105"
+      className="flex flex-col justify-between items-center bg-transparent overflow-hidden rounded-md cursor-pointer transition-all duration-150 hover:scale-105 hover:shadow-xl"
     >
       <Image
         className="object-cover"
@@ -143,13 +151,13 @@ function CardEvent(props: CardEventProps): JSX.Element {
         alt="image event"
       />
 
-      <div className="px-5 py-4">
+      <div className="w-full flex flex-col justify-center items-start py-4 px-2">
         <h2 className="capitalize font-bold text-xl text-slate-800">
           {props.title}
         </h2>
 
         {/* wrapper detail */}
-        <div className="flex items-center gap-6 mt-1">
+        <div className="flex flex-wrap items-center gap-6 mt-1">
           <div className="flex justify-start items-center gap-3">
             <GroupsIcon className="fill-slate-800 text-3xl" />
             <span className="text-slate-800 text-sm font-semibold">
@@ -165,14 +173,15 @@ function CardEvent(props: CardEventProps): JSX.Element {
           </div>
         </div>
 
-        <p className="text-slate-600 capitalize text-sm mt-2">
+        {/* TODO */}
+        {/* <p className="text-slate-600 capitalize text-sm mt-2">
           {props.description}
-        </p>
+        </p> */}
       </div>
 
-      <button className="w-[90%] text-center my-4 capitalize font-semibold text-slate-100 bg-slate-900 rounded-md px-1 py-2 duration-150 transition-all hover:bg-slate-500">
+      {/* <button className="w-[90%] text-center my-4 capitalize font-semibold text-slate-100 bg-slate-900 rounded-md px-1 py-2 duration-150 transition-all hover:bg-slate-500">
         ikut event
-      </button>
+      </button> */}
     </Link>
   );
 }

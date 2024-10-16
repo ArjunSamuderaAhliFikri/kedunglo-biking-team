@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { user } from "@/service/user";
-import Link from "next/link";
+import { TicketUserContext } from "@/context/ticketUserContext";
 
 type DataDetailEvent = {
   id: number;
@@ -33,9 +33,11 @@ const DetailEvent = (): JSX.Element => {
     DataDetailEvent | null | undefined
   >();
   const [loading, setLoading] = useState<boolean>(false);
-  const [ticketUser, setTicketUser] = useState<number | null>(1);
 
   const { query } = useRouter();
+
+  // context
+  const { ticketUser, setTicketUser } = useContext(TicketUserContext);
 
   function handleFollowingEvent(): void {
     // kita ambil data peserta yang lama, kemudian akan kita manipulasi dengan menambahkan data baru (yaitu user itu sendiri)
@@ -47,7 +49,7 @@ const DetailEvent = (): JSX.Element => {
     setTimeout(() => {
       setLoading(false);
       setDataDetailEvent({ ...dataDetailEvent, participans: addNewParticipan });
-      setTicketUser(0);
+      setTicketUser(ticketUser - 1);
     }, 1000);
   }
 
@@ -163,7 +165,7 @@ const DetailEvent = (): JSX.Element => {
                     {loading
                       ? "Loading"
                       : ticketUser == 0
-                      ? "mengikuti event"
+                      ? "anda sudah mengikuti satu event"
                       : "ikuti event"}
                   </button>
                 </div>

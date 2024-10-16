@@ -1,6 +1,7 @@
 import { outfit } from "@/pages/fonts/outfit";
 import SidebarLayout from "../Sidebar";
 import { useRouter } from "next/router";
+import TicketUserContextLayout from "@/context/ticketUserContext";
 
 type AppShellProps = {
   children: React.ReactNode;
@@ -10,7 +11,6 @@ const AppShell = (props: AppShellProps): JSX.Element => {
   const hideBgKBT = ["/ListEventPage", "/ListEventPage/[DetailEvent]"];
 
   const { pathname } = useRouter();
-  console.log(pathname);
 
   return (
     <div
@@ -21,8 +21,10 @@ const AppShell = (props: AppShellProps): JSX.Element => {
       } w-full h-[10.5dvh] ${outfit.className}`}
     >
       <TemplateLayout>
-        {pathname != "/ListEventPage/[DetailEvent]" && <SidebarLayout />}
-        {props.children}
+        <TicketUserContextLayout>
+          {pathname != "/ListEventPage/[DetailEvent]" && <SidebarLayout />}
+          {props.children}
+        </TicketUserContextLayout>
       </TemplateLayout>
     </div>
   );

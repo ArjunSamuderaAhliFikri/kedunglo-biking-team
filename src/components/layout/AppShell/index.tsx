@@ -15,9 +15,7 @@ const AppShell = (props: AppShellProps): JSX.Element => {
   return (
     <div
       className={`relative ${
-        hideBgKBT.includes(pathname)
-          ? "bg-transparent"
-          : "bg-[url(/images/kedunglo-biking-team.jpg)] bg-center bg-cover bg-no-repeat"
+        hideBgKBT.includes(pathname) ? "bg-transparent" : "bg-slate-900"
       } w-full h-[10.5dvh] ${outfit.className}`}
     >
       <TemplateLayout>
@@ -29,6 +27,8 @@ const AppShell = (props: AppShellProps): JSX.Element => {
     </div>
   );
 };
+
+// bg-[url(/images/kedunglo-biking-team.jpg)] bg-center bg-cover bg-no-repeat"
 
 function TemplateLayout(props: AppShellProps): JSX.Element {
   const { pathname } = useRouter();

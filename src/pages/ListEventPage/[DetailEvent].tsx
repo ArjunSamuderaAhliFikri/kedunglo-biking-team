@@ -4,6 +4,7 @@ import Image from "next/image";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { user } from "@/service/user";
 import { TicketUserContext } from "@/context/ticketUserContext";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 type DataDetailEvent = {
   id: number;
@@ -17,6 +18,7 @@ type DataDetailEvent = {
     email: string;
     numberPhone: number;
     statusMedalers: string;
+    imageProfile: string;
   }[];
 };
 
@@ -26,12 +28,15 @@ type ParticipanProfile = {
   email: string;
   numberPhone: number;
   statusMedalers: string;
+  imageProfile: string;
 };
 
 const DetailEvent = (): JSX.Element => {
+  // state
   const [dataDetailEvent, setDataDetailEvent] = useState<
     DataDetailEvent | null | undefined
   >();
+  const [imageProfile, setImageProfile] = useState<ParticipanProfile>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const { query } = useRouter();
@@ -39,6 +44,7 @@ const DetailEvent = (): JSX.Element => {
   // context
   const { ticketUser, setTicketUser } = useContext(TicketUserContext);
 
+  // event handler
   function handleFollowingEvent(): void {
     // kita ambil data peserta yang lama, kemudian akan kita manipulasi dengan menambahkan data baru (yaitu user itu sendiri)
     const addNewParticipan = dataDetailEvent?.participans.slice();
@@ -52,6 +58,16 @@ const DetailEvent = (): JSX.Element => {
       setTicketUser(ticketUser - 1);
     }, 1000);
   }
+
+  // useEffect
+  useEffect(() => {
+    const getDataProfile = dataDetailEvent?.participans.slice(
+      0,
+      Math.ceil((dataDetailEvent?.participans.length * 1) / 2)
+    );
+
+    setImageProfile(getDataProfile);
+  }, [dataDetailEvent]);
 
   useEffect(() => {
     async function handleFilterData() {
@@ -93,19 +109,30 @@ const DetailEvent = (): JSX.Element => {
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-start mt-5 gap-3 text-slate-700">
-                    <div className="flex items-center w-fit rounded-md p-1">
-                      <ul className="flex w-fit">
-                        <li className="flex justify-center items-center relative h-10 w-10">
-                          <Image
-                            className="rounded-full absolute"
-                            src={"/images/profile-student.jpg"}
-                            alt="profile participan"
-                            width={35}
-                            height={35}
-                          />
-                        </li>
-                        <li className="flex justify-center items-center relative h-10 w-10">
+                  <div className="flex justify-start items-center mt-5 gap-3 text-slate-700">
+                    <div className="flex justify-center items-center w-fit gap-4 rounded-md p-1">
+                      <ul className="flex w-full">
+                        {imageProfile != undefined &&
+                          imageProfile.map(
+                            (
+                              data: { imageProfile: string | StaticImport },
+                              id: number
+                            ) => (
+                              <>
+                                <li className="flex justify-center items-center size-8">
+                                  <Image
+                                    className={`rounded-full`}
+                                    src={data.imageProfile}
+                                    alt="profile participan"
+                                    width={100}
+                                    height={100}
+                                  />
+                                </li>
+                              </>
+                            )
+                          )}
+                      </ul>
+                      {/* <li className="flex justify-center items-center relative h-10 w-10">
                           <Image
                             className="rounded-full absolute z-10 -left-6"
                             src={"/images/profile-user.jpg"}
@@ -117,7 +144,7 @@ const DetailEvent = (): JSX.Element => {
                         <li className="flex justify-center items-center relative h-10 w-10">
                           <Image
                             className="rounded-full absolute z-20 -left-12"
-                            src={"/images/profile-student.jpg"}
+                            src={"/images/profile-user.jpg"}
                             alt="profile participan"
                             width={35}
                             height={35}
@@ -140,16 +167,15 @@ const DetailEvent = (): JSX.Element => {
                             width={35}
                             height={35}
                           />
-                        </li>
-                      </ul>
-                      <h2 className="-translate-x-20 text-sm font-semibold text-slate-600">
+                        </li> */}
+
+                      <h2 className="text-xs font-semibold text-slate-600">
                         {dataDetailEvent.participans != undefined &&
-                          dataDetailEvent.participans.length}{" "}
-                        participan
+                          `${dataDetailEvent.participans.length} participan`}
                       </h2>
                     </div>
 
-                    <div className="flex items-center gap-4 rounded-md p-3">
+                    <div className="flex items-center gap-4 rounded-md p-3 bg-emerald-500">
                       <CalendarTodayIcon />
                       <span className="text-sm font-semibold text-slate-600">
                         {dataDetailEvent.date}
@@ -171,7 +197,7 @@ const DetailEvent = (): JSX.Element => {
                 </div>
               </div>
             </div>
-            <div className="container flex justify-center">
+            <div className="container flex justify-center py-8">
               <table className="bg-slate-900 table-auto rounded-md w-3/4 shadow-lg max-h-[500px] overflow-y-auto">
                 <thead className="border-b-2 border-slate-700">
                   <tr>
@@ -197,7 +223,7 @@ const DetailEvent = (): JSX.Element => {
                               <Image
                                 className="rounded-full"
                                 alt="profil user"
-                                src={"/images/profile-user.jpg"}
+                                src={data.imageProfile}
                                 width={35}
                                 height={35}
                               />

@@ -19,7 +19,7 @@ const SidebarLayout = (): JSX.Element => {
         </div>
 
         {/* profile user */}
-        <div className="h-[60dvh] mt-20 px-10 flex flex-col justify-start items-center gap-5">
+        <div className="h-[50dvh] 2xl:h-[60dvh] mt-14 2xl:mt-20 px-10 flex flex-col justify-start items-center gap-5">
           <Image
             className="rounded-full cursor-pointer"
             src={"/images/profile-user.jpg"}
@@ -29,25 +29,25 @@ const SidebarLayout = (): JSX.Element => {
           />
 
           <div className="text-center capitalize">
-            <h4 className="text-[#536878] mb-1 capitalize font-normal text-sm">
+            <h4 className="text-[#536878] mb-1 capitalize font-normal text-xs 2xl:text-sm">
               hello, medalers!
             </h4>
-            <h1 className="text-[#2A3439] capitalize font-medium text-xl">
+            <h1 className="text-[#2A3439] capitalize font-medium text-lg 2xl:text-xl">
               arjun samudera
             </h1>
           </div>
 
-          <div className="w-[90%] size-28 bg-slate-400/25 rounded-lg flex flex-col justify-center items-center gap-2">
+          <div className="2xl:w-[90%] p-2 2xl:p-0 size-24 2xl:h-24 bg-slate-400/25 rounded-lg flex flex-col justify-center items-center gap-2">
             <p className="text-sm font-normal capitalize text-slate-500">
               your tagged :
             </p>
-            <h2 className="text-lg font-bold uppercase text-slate-900">
+            <h2 className="2xl:text-md font-bold uppercase text-slate-900">
               #LGOLDKBT
             </h2>
           </div>
 
-          <ul className="capitalize font-semibold text-slate-700 mt-10 text-lg flex flex-col justify-start items-start gap-6 w-[90%]">
-            <li className="transition-all duration-150 hover:text-slate-800">
+          <ul className="capitalize font-semibold text-slate-700 mt-2 2xl:mt-10 text-lg flex flex-col justify-start items-start gap-5 2xl:gap-6 w-[90%]">
+            <li className="transition-all duration-150 hover:text-slate-800 text-sm 2xl:text-md">
               <Link
                 className="flex items-center justify-center gap-4"
                 href={"/"}
@@ -56,7 +56,7 @@ const SidebarLayout = (): JSX.Element => {
                 list user
               </Link>
             </li>
-            <li className="font-normal transition-all duration-150 hover:text-slate-800 text-slate-400">
+            <li className="font-normal transition-all duration-150 hover:text-slate-800 text-slate-400 text-sm 2xl:text-md">
               <Link
                 className="flex items-center justify-center gap-4"
                 href={"/ListEventPage"}
@@ -69,7 +69,7 @@ const SidebarLayout = (): JSX.Element => {
 
           {/* logout button */}
           <Link
-            className="flex items-center justify-center gap-3 px-8 py-3 mt-auto capitalize transition-all duration-150 rounded-md shadow-md bg-slate-100 text-slate-900 hover:bg-slate-600 hover:text-slate-100"
+            className="flex items-center justify-center gap-3 px-4 py-2 2xl:px-8 2xl:py-3 mt-auto capitalize transition-all duration-150 rounded-md shadow-md text-sm 2xl:text-md bg-slate-100 text-slate-900 hover:bg-slate-600 hover:text-slate-100"
             href={"/"}
           >
             <LogoutIcon />

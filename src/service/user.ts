@@ -5,4 +5,5 @@ export const user = {
   age: 8,
   city: "kota kediri",
   email: "nawal",
+  imageProfile: "/images/profile-user.jpg",
 };

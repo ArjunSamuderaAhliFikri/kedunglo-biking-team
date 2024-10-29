@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import GroupsIcon from "@mui/icons-material/Groups";
 import EventIcon from "@mui/icons-material/Event";
-import { useEffect, useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 type DataEvents = {
   id: number;
@@ -20,8 +21,39 @@ type DataEvents = {
 }[];
 
 const ListEventPage = (): JSX.Element => {
+  // state
   const [listEvent, setListEvent] = useState<DataEvents>([]);
-  const [ticket, setTicket] = useState<string | null>("");
+  const [test, setTest] = useState<DataEvents>([]);
+  const [searchText, setSearchText] = useState<string>("");
+
+  // ref
+  const searchElementRef = useRef<any>();
+
+  // event handler
+  const handleSearchSomeEvent = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    setSearchText(searchElementRef.current.value);
+  };
+
+  const handleChangeInput = (event: string): void => {
+    if (event == "") {
+      setTest([...listEvent]);
+    }
+  };
+
+  // useEffect
+  useEffect(() => {
+    const filteringListEvent = listEvent.slice();
+    if (!searchText) {
+      setTest(filteringListEvent);
+    }
+
+    const searchSomeEvent = filteringListEvent.filter((data) =>
+      data.title.toLowerCase().includes(searchText.toLowerCase())
+    );
+
+    setTest(searchSomeEvent);
+  }, [searchText]);
 
   useEffect(() => {
     const fetchingDataEvents = async () => {
@@ -29,16 +61,10 @@ const ListEventPage = (): JSX.Element => {
       const responseData = await fetchingData.json();
 
       setListEvent(responseData);
+      setTest(responseData);
     };
 
     fetchingDataEvents();
-  }, []);
-
-  useEffect(() => {
-    // TODOOOOOO
-    localStorage.setItem("ticketPoint", "1");
-    // const getTicket = localStorage.getItem("ticket");
-    // setTicket(getTicket);
   }, []);
 
   return (
@@ -74,26 +100,24 @@ const ListEventPage = (): JSX.Element => {
           />
 
           {/* form search */}
-          <div className="absolute z-50 w-1/2 -bottom-8 left-1/2 -translate-x-1/2 bg-slate-100 p-4 rounded-md shadow-md">
+          <form
+            onSubmit={(event) => handleSearchSomeEvent(event)}
+            className="flex absolute z-50 w-1/2 -bottom-8 left-1/2 -translate-x-1/2 bg-slate-100 p-4 rounded-md shadow-md"
+          >
             <input
-              className="placeholder:text-slate-500 text-slate-500 bg-slate-200 px-3 py-2 w-full rounded-md shadow placeholder:font-normal outline-none"
+              onChange={(event) => handleChangeInput(event.target.value)}
+              ref={searchElementRef}
+              className="placeholder:text-slate-500 text-slate-500 bg-slate-200 px-3 py-2 w-full rounded-tl-md rounded-bl-md placeholder:font-normal outline-none"
               type="text"
               placeholder="cari event..."
             />
-            {/* <div className="mt-4 w-3/4 mx-auto">
-              <ul className="flex justify-around items-center">
-                <li className="text-slate-800 bg-slate-200 p-2 rounded-md">
-                  latest
-                </li>
-                <li className="text-slate-800 bg-slate-200 p-2 rounded-md">
-                  old
-                </li>
-                <li className="text-slate-800 bg-slate-200 p-2 rounded-md">
-                  nearest
-                </li>
-              </ul>
-            </div> */}
-          </div>
+            <button
+              className="text-slate-900 outline-none bg-slate-200 size-10 rounded-tr-md rounded-br-md overflow-hidden hover:bg-slate-300"
+              type="submit"
+            >
+              <SearchIcon />
+            </button>
+          </form>
         </div>
         {/* <HeaderEventPage /> */}
         <div className="relative">
@@ -103,7 +127,7 @@ const ListEventPage = (): JSX.Element => {
             </h1>
           </div>
           <div className="grid grid-cols-3 lg:px-14 px-24 mt-14 w-full gap-7 lg:py-16 py-12">
-            {listEvent.map((data) => {
+            {test.map((data) => {
               return (
                 <CardEvent
                   id={data.id}
@@ -141,7 +165,7 @@ function CardEvent(props: CardEventProps): JSX.Element {
   return (
     <Link
       href={`ListEventPage/${props.id}`}
-      className="flex flex-col justify-between items-center bg-transparent overflow-hidden rounded-md cursor-pointer transition-all duration-150 hover:scale-105 hover:shadow-xl"
+      className="flex flex-col justify-between items-center bg-transparent overflow-hidden rounded-md cursor-pointer transition-all border-2 border-slate-200 duration-150 hover:scale-105 hover:shadow-xl"
     >
       <Image
         className="object-cover"
@@ -174,9 +198,13 @@ function CardEvent(props: CardEventProps): JSX.Element {
         </div>
 
         {/* TODO */}
-        {/* <p className="text-slate-600 capitalize text-sm mt-2">
-          {props.description}
-        </p> */}
+        <p className="text-slate-600 capitalize text-sm mt-2">
+          {props.description.substring(
+            0,
+            Math.round(props.description.length / 2)
+          )}
+          ..
+        </p>
       </div>
 
       {/* <button className="w-[90%] text-center my-4 capitalize font-semibold text-slate-100 bg-slate-900 rounded-md px-1 py-2 duration-150 transition-all hover:bg-slate-500">

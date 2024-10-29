@@ -14,12 +14,9 @@ type Data = {
     email: string;
     numberPhone: number;
     statusMedalers: string;
+    imageProfile: string;
   }[];
 }[];
-
-function getDataItem(response: any) {
-  return response;
-}
 
 export default function handler(
   req: NextApiRequest,

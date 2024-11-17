@@ -36,7 +36,7 @@ function TemplateLayout(props: AppShellProps): JSX.Element {
     <div
       className={`${
         pathname != "/ListEventPage/[DetailEvent]" &&
-        "grid 2xl:grid-cols-app-grid-desktop grid-cols-app-grid-laptop gap-5 absolute w-[95%] h-[90dvh] top-1/2 left-1/2 -translate-x-1/2"
+        "flex flex-col lg:grid 2xl:grid-cols-app-grid-desktop grid-cols-app-grid-laptop gap-5 absolute w-[95%] h-[90dvh] top-1/2 left-1/2 -translate-x-1/2"
       }`}
     >
       {props.children}

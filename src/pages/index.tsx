@@ -2,6 +2,8 @@ import TableBodyFragment from "@/components/fragments/TableBody";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelectedGender } from "@/hooks/useSelectedGender";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import Image from "next/image";
 type DataMedalers = {
   id: number;
   profile: {
@@ -80,7 +82,78 @@ const DashboardPage = (): JSX.Element => {
     <>
       <main className="container relative">
         <div className="relative p-2">
-          <div className="absolute right-0 flex items-center justify-around gap-5 h-20 px-2 py-4 rounded-md bg-slate-900 -bottom-15">
+          <div className="text-slate-100 absolute -top-3 right-10 text-xl">
+            <div className="relative w-fit cursor-pointer">
+              <span className="absolute -top-2 -right-2 size-6 rounded-full bg-red-500 overflow-hidden flex justify-center items-center font-semibold text-xs">
+                +5
+              </span>
+              <NotificationsIcon />
+            </div>
+          </div>
+          <ul className="lg:w-fit flex justify-between items-center bg-gray-800 p-3 rounded-bl-lg rounded-br-lg absolute lg:left-[57%] lg:top-10 lg:rounded-lg -top-8 w-full left-0 lg:gap-7">
+            <li
+              onClick={() => setDataBy("man-distance")}
+              className="text-slate-100 cursor-pointer group flex flex-col items-center justify-center gap-3 scale-90"
+            >
+              <Image
+                className="fill-slate-100 group-hover:fill-slate-400"
+                src={"/svg/distance-biking.svg"}
+                alt="distance biking icon"
+                width={30}
+                height={30}
+              />
+              <span className="capitalize font-normal text-xs group-hover:text-slate-400 text-center">
+                man distance
+              </span>
+            </li>
+            <li
+              onClick={() => setDataBy("woman-distance")}
+              className="text-slate-100 cursor-pointer group flex flex-col items-center justify-center gap-3 scale-90"
+            >
+              <Image
+                className="fill-slate-100 group-hover:fill-slate-400"
+                src={"/svg/distance-biking.svg"}
+                alt="distance biking icon"
+                width={30}
+                height={30}
+              />
+              <span className="capitalize font-normal text-xs group-hover:text-slate-400 text-center">
+                woman distance
+              </span>
+            </li>
+            <li
+              onClick={() => setDataBy("man-elevation")}
+              className="text-slate-100 cursor-pointer group flex flex-col items-center justify-center gap-3 scale-90"
+            >
+              <Image
+                className="fill-slate-100 group-hover:fill-slate-400"
+                src={"/svg/elevation-biking.svg"}
+                alt="elevation biking icon"
+                width={30}
+                height={30}
+              />
+              <span className="capitalize font-normal text-xs group-hover:text-slate-400 text-center">
+                man elevation
+              </span>
+            </li>
+            <li
+              onClick={() => setDataBy("woman-elevation")}
+              className="text-slate-100 cursor-pointer group flex flex-col items-center justify-center gap-3 scale-90"
+            >
+              <Image
+                className="fill-slate-100 group-hover:fill-slate-400"
+                src={"/svg/elevation-biking.svg"}
+                alt="elevation biking icon"
+                width={30}
+                height={30}
+              />
+              <span className="capitalize font-normal text-xs group-hover:text-slate-400 text-center">
+                woman elevation
+              </span>
+            </li>
+          </ul>
+
+          {/* <div className="absolute right-0 flex items-center justify-around gap-5 h-20 px-2 py-4 rounded-md bg-slate-900 -bottom-15">
             <button
               onClick={() => setDataBy("man-distance")}
               className="px-4 py-3 rounded-md bg-slate-700 text-slate-100"
@@ -105,11 +178,11 @@ const DashboardPage = (): JSX.Element => {
             >
               woman elevation
             </button>
-          </div>
+          </div> */}
         </div>
 
         <section id="main-dashboard" className="py-5 mt-12 max-h-[100px]">
-          <h1 className="text-[#323232] font-semibold text-2xl capitalize mt-1">
+          <h1 className="hidden lg:block text-[#323232] font-semibold text-2xl capitalize mt-1">
             dashboard
           </h1>
           <div

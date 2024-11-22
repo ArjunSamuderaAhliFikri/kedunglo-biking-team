@@ -90,7 +90,7 @@ const DashboardPage = (): JSX.Element => {
               <NotificationsIcon />
             </div>
           </div>
-          <ul className="lg:w-fit flex justify-between items-center bg-gray-800 p-3 rounded-bl-lg rounded-br-lg absolute lg:left-[57%] lg:top-10 lg:rounded-lg -top-8 w-full left-0 lg:gap-7">
+          <ul className="lg:w-fit flex justify-between items-center bg-gray-800 p-3 rounded-bl-lg rounded-br-lg absolute lg:left-[57%] 2xl:left-[70%] lg:top-10 lg:rounded-lg -top-8 w-full left-0 lg:gap-7">
             <li
               onClick={() => setDataBy("man-distance")}
               className="text-slate-100 cursor-pointer group flex flex-col items-center justify-center gap-3 scale-90"

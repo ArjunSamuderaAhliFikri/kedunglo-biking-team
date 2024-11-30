@@ -1,7 +1,6 @@
 import TableBodyFragment from "@/components/fragments/TableBody";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelectedGender } from "@/hooks/useSelectedGender";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Image from "next/image";
 type DataMedalers = {
@@ -24,9 +23,6 @@ const DashboardPage = (): JSX.Element => {
   const [dataMedalers, setDataMedalers] = useState<DataMedalers>([]);
   const [currentRecords, setCurrentRecords] = useState<any[]>([]);
   const [currentType, setCurrentType] = useState<string>("");
-
-  const selectedMan = useSelectedGender();
-  const selectedWoman = useSelectedGender();
 
   // fungsi ini untuk menangani proses penyaringan data sesuai permintaan user
   function filteringDataBy(type: string, data: any[]) {
@@ -152,33 +148,6 @@ const DashboardPage = (): JSX.Element => {
               </span>
             </li>
           </ul>
-
-          {/* <div className="absolute right-0 flex items-center justify-around gap-5 h-20 px-2 py-4 rounded-md bg-slate-900 -bottom-15">
-            <button
-              onClick={() => setDataBy("man-distance")}
-              className="px-4 py-3 rounded-md bg-slate-700 text-slate-100"
-            >
-              man distance
-            </button>
-            <button
-              onClick={() => setDataBy("woman-distance")}
-              className="px-4 py-3 rounded-md bg-slate-700 text-slate-100"
-            >
-              woman distance
-            </button>
-            <button
-              onClick={() => setDataBy("man-elevation")}
-              className="px-4 py-3 rounded-md bg-slate-700 text-slate-100"
-            >
-              man elevation
-            </button>
-            <button
-              onClick={() => setDataBy("woman-elevation")}
-              className="px-4 py-3 rounded-md bg-slate-700 text-slate-100"
-            >
-              woman elevation
-            </button>
-          </div> */}
         </div>
 
         <section id="main-dashboard" className="py-5 mt-12 max-h-[100px]">

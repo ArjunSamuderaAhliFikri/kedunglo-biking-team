@@ -23,6 +23,7 @@ type DataDetailEvent = {
 };
 
 type ParticipanProfile = {
+  [x: string]: any;
   name: string;
   age: number;
   email: string;
@@ -90,26 +91,27 @@ const DetailEvent = (): JSX.Element => {
         <>
           <section className="flex h-screen flex-col gap-y-52 bg-slate-200 overflow-auto">
             <div className="flex justify-center bg-slate-800 w-full py-16 2xl:h-44 relative mb-28 2xl:mb-36 2xl:py-5">
-              <div className="flex bg-slate-100 w-3/4 2xl:w-[65%] absolute top-14 h-[325px] 2xl:h-[350px] mx-auto rounded-md overflow-hidden shadow-md">
+              <div className="flex xl:flex-row flex-col bg-slate-100 w-11/12 xl:w-10/12 2xl:w-7/12 absolute top-14 h-[325px] 2xl:h-[350px] mx-auto rounded-md overflow-hidden shadow-md">
                 <Image
+                  className="h-24 object-cover xl:h-full"
                   src={"/images/bikes.jpg"}
                   alt={dataDetailEvent.title}
                   width={475}
                   height={455}
                 />
 
-                <div className="p-7">
-                  <div className="tracking-normal w-3/4">
-                    <h1 className="text-slate-800 font-semibold text-2xl capitalize">
+                <div className="xl:p-7 p-5">
+                  <div className="tracking-normal xl:w-3/4 w-full">
+                    <h1 className="text-slate-800 font-semibold xl:text-2xl text-lg capitalize">
                       {dataDetailEvent.title}
                     </h1>
 
-                    <p className="text-slate-500 font-normal capitalize mt-2 text-sm">
+                    <p className="text-slate-500 font-normal capitalize xl:mt-2 mt-1 xl:text-sm text-xs">
                       {dataDetailEvent.description}
                     </p>
                   </div>
 
-                  <div className="flex justify-start items-center mt-5 gap-3 text-slate-700">
+                  <div className="flex xl:justify-start justify-between items-center mt-5 gap-3 text-slate-700">
                     <div className="flex justify-center items-center w-fit gap-4 rounded-md p-1">
                       <ul className="flex w-full">
                         {imageProfile != undefined &&
@@ -132,42 +134,6 @@ const DetailEvent = (): JSX.Element => {
                             )
                           )}
                       </ul>
-                      {/* <li className="flex justify-center items-center relative h-10 w-10">
-                          <Image
-                            className="rounded-full absolute z-10 -left-6"
-                            src={"/images/profile-user.jpg"}
-                            alt="profile participan"
-                            width={35}
-                            height={35}
-                          />
-                        </li>
-                        <li className="flex justify-center items-center relative h-10 w-10">
-                          <Image
-                            className="rounded-full absolute z-20 -left-12"
-                            src={"/images/profile-user.jpg"}
-                            alt="profile participan"
-                            width={35}
-                            height={35}
-                          />
-                        </li>
-                        <li className="flex justify-center items-center relative h-10 w-10">
-                          <Image
-                            className="rounded-full absolute z-30 -left-[70px]"
-                            src={"/images/profile-user.jpg"}
-                            alt="profile participan"
-                            width={35}
-                            height={35}
-                          />
-                        </li>
-                        <li className="flex justify-center items-center relative h-10 w-10">
-                          <Image
-                            className="rounded-full absolute z-40 -left-[90px]"
-                            src={"/images/profile-user.jpg"}
-                            alt="profile participan"
-                            width={35}
-                            height={35}
-                          />
-                        </li> */}
 
                       <h2 className="text-xs font-semibold text-slate-600">
                         {dataDetailEvent.participans != undefined &&
@@ -175,9 +141,9 @@ const DetailEvent = (): JSX.Element => {
                       </h2>
                     </div>
 
-                    <div className="flex items-center gap-4 rounded-md p-3 bg-emerald-500">
+                    <div className="flex items-center gap-4 rounded-md p-3 text-slate-900 bg-slate-300">
                       <CalendarTodayIcon />
-                      <span className="text-sm font-semibold text-slate-600">
+                      <span className="text-sm font-semibold">
                         {dataDetailEvent.date}
                       </span>
                     </div>
@@ -185,7 +151,7 @@ const DetailEvent = (): JSX.Element => {
                   <button
                     disabled={loading || ticketUser == 0}
                     onClick={handleFollowingEvent}
-                    className="text-slate-100 bg-slate-900 px-6 py-2 rounded-md capitalize text-md absolute bottom-5 right-8 transition-all hover:bg-slate-700 hover:text-slate-400 disabled:bg-slate-600 disabled:text-slate-500"
+                    className="text-slate-100 bg-slate-900 px-6 py-2 rounded-md capitalize text-md absolute xl:bottom-5 bottom-2 lg:w-fit w-11/12 right-1/2 lg:translate-x-0  translate-x-1/2 xl:right-8 transition-all hover:bg-slate-700 hover:text-slate-400 disabled:bg-slate-600 disabled:text-slate-500"
                     type="button"
                   >
                     {loading
@@ -198,7 +164,7 @@ const DetailEvent = (): JSX.Element => {
               </div>
             </div>
             <div className="container flex justify-center py-8">
-              <table className="bg-slate-900 table-auto rounded-md w-3/4 shadow-lg max-h-[500px] overflow-y-auto">
+              <table className="bg-slate-900 table-auto rounded-md xl:w-3/4 w-11/12 shadow-lg max-h-[500px] overflow-y-auto">
                 <thead className="border-b-2 border-slate-700">
                   <tr>
                     <th className="p-3 capitalize font-semibold text-slate-200">
@@ -217,8 +183,13 @@ const DetailEvent = (): JSX.Element => {
                     dataDetailEvent.participans.map(
                       (data: ParticipanProfile, id: number) => (
                         <>
-                          <tr className="border-b-2 border-slate-300" key={id}>
-                            <td className="py-4 p-2 text-center">{id + 1}</td>
+                          <tr
+                            className="border-b-2 bg-slate-100 border-slate-300"
+                            key={id}
+                          >
+                            <td className="xl:py-4 p-2 text-center">
+                              {id + 1}
+                            </td>
                             <td className="py-4 flex gap-5 items-center p-2 text-left">
                               <Image
                                 className="rounded-full"
@@ -228,13 +199,17 @@ const DetailEvent = (): JSX.Element => {
                                 height={35}
                               />
                               <div className="flex flex-col">
-                                <h1 className="text-md">{data.name}</h1>
-                                <span className="text-xs text-slate-500 uppercase">
+                                <h1 className="xl:text-md text-xs font-semibold">
+                                  {data.name.length >= 20
+                                    ? `${data.name.substring(0, 20)}..`
+                                    : data.name}
+                                </h1>
+                                <span className="text-xs font-normal lg:font-semibold text-slate-500 uppercase">
                                   #lgoldkbt
                                 </span>
                               </div>
                             </td>
-                            <td className="py-4 p-2 text-center uppercase">
+                            <td className="lg:py-4 py-0 lg:p-2 p-3 text-xs lg:text-lg text-center uppercase">
                               kota kediri
                             </td>
                           </tr>

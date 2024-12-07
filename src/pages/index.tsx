@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Image from "next/image";
+import SkeletonUser from "@/components/skeletons/skeletonUser";
 type DataMedalers = {
   id: number;
   profile: {
@@ -193,7 +194,7 @@ const DashboardPage = (): JSX.Element => {
               </thead>
 
               <tbody>
-                {currentRecords.length > 0 &&
+                {currentRecords.length > 0 ? (
                   currentRecords.map((data, index) => (
                     <TableBodyFragment
                       currentType={currentType}
@@ -204,7 +205,16 @@ const DashboardPage = (): JSX.Element => {
                       elevation={data.elevation}
                       isEdit={data.isEdit}
                     />
-                  ))}
+                  ))
+                ) : (
+                  <>
+                    <SkeletonUser />
+                    <SkeletonUser />
+                    <SkeletonUser />
+                    <SkeletonUser />
+                    <SkeletonUser />
+                  </>
+                )}
               </tbody>
             </table>
           </div>

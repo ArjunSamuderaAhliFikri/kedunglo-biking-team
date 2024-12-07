@@ -4,6 +4,7 @@ import GroupsIcon from "@mui/icons-material/Groups";
 import EventIcon from "@mui/icons-material/Event";
 import SearchIcon from "@mui/icons-material/Search";
 import { FormEvent, useEffect, useRef, useState } from "react";
+import SkeletonCardEvent from "@/components/skeletons/skeletonCardEvent";
 
 type DataEvents = {
   id: number;
@@ -127,18 +128,26 @@ const ListEventPage = (): JSX.Element => {
             </h1>
           </div>
           <div className="grid xl:grid-cols-3 grid-cols-1 lg:px-14 xl:px-24 px-5 mt-14 w-full xl:gap-7 gap-10 lg:py-16 py-12">
-            {test.map((data) => {
-              return (
-                <CardEvent
-                  id={data.id}
-                  title={data.title}
-                  qtyParticipan={data.qtyParticipan}
-                  date={data.date}
-                  description={data.description}
-                  participans={data.participans}
-                />
-              );
-            })}
+            {test.length > 0 ? (
+              test.map((data) => {
+                return (
+                  <CardEvent
+                    id={data.id}
+                    title={data.title}
+                    qtyParticipan={data.qtyParticipan}
+                    date={data.date}
+                    description={data.description}
+                    participans={data.participans}
+                  />
+                );
+              })
+            ) : (
+              <>
+                <SkeletonCardEvent />
+                <SkeletonCardEvent />
+                <SkeletonCardEvent />
+              </>
+            )}
           </div>
         </div>
       </div>

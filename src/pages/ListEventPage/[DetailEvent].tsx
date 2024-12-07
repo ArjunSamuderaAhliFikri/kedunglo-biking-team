@@ -2,9 +2,11 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { user } from "@/service/user";
 import { TicketUserContext } from "@/context/ticketUserContext";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import Link from "next/link";
 
 type DataDetailEvent = {
   id: number;
@@ -91,6 +93,17 @@ const DetailEvent = (): JSX.Element => {
         <>
           <section className="flex h-screen flex-col gap-y-52 bg-slate-200 overflow-auto">
             <div className="flex justify-center bg-slate-800 w-full py-16 2xl:h-44 relative mb-28 2xl:mb-36 2xl:py-5">
+              <div className="absolute lg:top-5 top-2 left-4">
+                <Link
+                  href={"/ListEventPage"}
+                  className="text-slate-100 flex items-center gap-1 bg-slate-700 py-2 px-3 rounded-lg group hover:bg-slate-100 transition-all duration-150 text-sm hover:shadow-sm hover:shadow-slate-50"
+                >
+                  <ArrowBackIcon className="group-hover:text-slate-800" />
+                  <span className="capitalize group-hover:text-slate-800">
+                    back
+                  </span>
+                </Link>
+              </div>
               <div className="flex xl:flex-row flex-col bg-slate-100 w-11/12 xl:w-10/12 2xl:w-7/12 absolute top-14 h-[325px] 2xl:h-[350px] mx-auto rounded-md overflow-hidden shadow-md">
                 <Image
                   className="h-24 object-cover xl:h-full"
@@ -199,7 +212,7 @@ const DetailEvent = (): JSX.Element => {
                                 height={35}
                               />
                               <div className="flex flex-col">
-                                <h1 className="xl:text-md text-xs font-semibold">
+                                <h1 className="lg:text-md text-xs font-semibold">
                                   {data.name.length >= 20
                                     ? `${data.name.substring(0, 20)}..`
                                     : data.name}
@@ -209,7 +222,7 @@ const DetailEvent = (): JSX.Element => {
                                 </span>
                               </div>
                             </td>
-                            <td className="lg:py-4 py-0 lg:p-2 p-3 text-xs lg:text-lg text-center uppercase">
+                            <td className="lg:py-4 py-0 lg:p-2 p-3 text-xs lg:text-md text-center uppercase">
                               kota kediri
                             </td>
                           </tr>
